@@ -26,9 +26,7 @@ function cameraStart() {
         .getUserMedia(GetConstraints())
         .then(function(stream) {
             track = stream.getTracks()[0];
-            cameraView.srcObject = null;
             cameraView.srcObject = stream;
-            cameraView.play();
         })
         .catch(function(error) {
             console.error("Oops. Something is broken.", error);
@@ -46,16 +44,11 @@ cameraTrigger.onclick = function() {
 };
 
 cameraSwitch.onclick = function() {
-    const tracks = stream.getTracks();
-    tracks.forEach(track1 => track1.stop());
+    track.stop();
 
     SwitchCameraFlag();
-    //cameraStart();
+    cameraStart();
 
-    // Add this stream to the video object
-    cameraView.srcObject = null;
-    cameraView.srcObject = stream;
-    cameraView.play();
    
 };
 
