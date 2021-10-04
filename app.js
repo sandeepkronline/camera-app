@@ -11,7 +11,7 @@ const cameraView = document.querySelector("#camera--view"),
     cameraSwitch = document.querySelector("#camera--switch");
 
 function GetConstraints(){
-    facingModeStr = frontCamera ? "environment" : "environment";
+    facingModeStr = frontCamera ? "user" : "environment";
     var constraints = { video: { facingMode: facingModeStr }, audio: false };
     return constraints
 }
@@ -21,7 +21,7 @@ function SwitchCameraFlag(){
 }
 
 // Access the device camera and stream to cameraView
-function cameraStart() {
+function cameraStart() {  
     navigator.mediaDevices
         .getUserMedia(GetConstraints())
         .then(function(stream) {
