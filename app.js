@@ -22,8 +22,22 @@ function SwitchCameraFlag(){
 
 // Access the device camera and stream to cameraView
 function cameraStart() {  
+    var constraints = { video: { facingMode: "user" }, audio: false };
     navigator.mediaDevices
-        .getUserMedia(GetConstraints())
+        .getUserMedia(constraints)
+        .then(function(stream) {
+            track = stream.getTracks()[0];
+            cameraView.srcObject = stream;
+        })
+        .catch(function(error) {
+            console.error("Oops. Something is broken.", error);
+        });
+}
+
+function cameraStart1() {  
+    var constraints = { video: { facingMode: "environment" }, audio: false };
+    navigator.mediaDevices
+        .getUserMedia(constraints)
         .then(function(stream) {
             track = stream.getTracks()[0];
             cameraView.srcObject = stream;
@@ -47,7 +61,7 @@ cameraSwitch.onclick = function() {
     track.stop();
 
     SwitchCameraFlag();
-    cameraStart();
+    cameraStart1();
 
    
 };
