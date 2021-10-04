@@ -16,12 +16,18 @@ function GetConstraints(){
     return constraints
 }
 
-function SwitchCameraFlag(){
-    frontCamera = !frontCamera;
+function SwitchCamera(){
+    if (true == frontCamera) {
+        cameraStartRear();   
+    }
+    else{
+        cameraStartFront();
+    }
 }
 
 // Access the device camera and stream to cameraView
-function cameraStart() {  
+function cameraStartFront() {  
+    frontCamera = true
     var constraints = { video: { facingMode: "user" }, audio: false };
     navigator.mediaDevices
         .getUserMedia(constraints)
@@ -34,7 +40,8 @@ function cameraStart() {
         });
 }
 
-function cameraStart1() {  
+function cameraStartRear() { 
+    frontCamera = false 
     var constraints = { video: { facingMode: "environment" }, audio: false };
     navigator.mediaDevices
         .getUserMedia(constraints)
@@ -60,11 +67,11 @@ cameraTrigger.onclick = function() {
 cameraSwitch.onclick = function() {
     track.stop();
 
-    SwitchCameraFlag();
+    SwitchCamera();
     cameraStart1();
 
    
 };
 
 // Start the video stream when the window loads
-window.addEventListener("load", cameraStart, false);
+window.addEventListener("load", cameraStartFront, false);
