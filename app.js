@@ -45,6 +45,7 @@ cameraTrigger.onclick = function() {
 
 cameraSwitch.onclick = function() {
     track.stop();
+    SwitchCameraFlag();
     cameraStart();
 };
 
