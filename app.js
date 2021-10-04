@@ -11,7 +11,7 @@ const cameraView = document.querySelector("#camera--view"),
     cameraSwitch = document.querySelector("#camera--switch");
 
 function GetConstraints(){
-    facingModeStr = frontCamera ? "user" : "environment";
+    facingModeStr = frontCamera ? "environment" : "environment";
     var constraints = { video: { facingMode: facingModeStr }, audio: false };
     return constraints
 }
